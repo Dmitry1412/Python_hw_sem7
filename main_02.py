@@ -11,18 +11,23 @@
 
 #        |    фраза  |    фраза    |   фраза    |
 #          | |  |  |   |   |   | |   |  |  |  |  слога
-stroka = 'пара-ра-рам рам-пам-папам па-ра-па-дам'
+#stroka = 'пара-ра-рам рам-пам-папам па-ра-па-дам'
 #           1   2  3   4   5   6     7  8  9  10   Слова
 #Ритм есть, если
 #Парам пам-пам  -> True
-def has_rhythm(stroka):
-    phrase = stroka.split()
+def has_rhythm(stroka: str):
+    vowels = ('а', 'е', 'ё', 'и', 'о', 'у', 'ы', 'э', 'ю', 'я')
+    phrase = stroka.lower().split()
     if len(phrase) > 1:
-        count_of_a = list()
+        sums = list()
         for i in range(0, len(phrase)):
-            count_of_a.append(phrase[i].count('а'))
-        if len(set(count_of_a)) == 1: print('Парам пам-пам')
+            sum = 0
+            for j in range(0, len(vowels)):
+                if vowels[j] in phrase[i]: sum +=phrase[i].count(vowels[j])
+            sums.append(sum)
+        if len(set(sums)) == 1: print('Парам пам-пам')
         else: print("Пам парам")
     else: print("Количество фраз должно быть больше одной!")
-    
+stroka = 'пара-ра-рам рам-пам-папам па-ра-па-дам'    
 has_rhythm(stroka)
+stroka = 'со-лнце-гре-ет ве-сной'
